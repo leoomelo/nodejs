@@ -4,12 +4,13 @@
   "description": "Site de noticias",
   "main": "noticias.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app3.js"
   },
   "author": "Leonardo Melo",
   "license": "ISC",
   "dependencies": {
     "ejs": "^2.5.2",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "nodemon": "^1.11.0"
   }
 }
