@@ -4,7 +4,7 @@
   "description": "Site de noticias",
   "main": "noticias.js",
   "scripts": {
-    "start": "nodemon app3.js"
+    "start": "nodemon app.js"
   },
   "author": "Leonardo Melo",
   "license": "ISC",
