@@ -2,6 +2,21 @@ console.log('Starting notes');
 
 const fs = require('fs');
 
+var readFileNotes = function() {
+	try {
+		var notesString = fs.readFileSync('notes.json');
+		return JSON.parse(notesString);
+	}
+	catch(e) {
+		console.log(e);
+		return [];
+	}
+}
+
+var saveFile = function(notes) {
+	fs.writeFileSync('notes.json', JSON.stringify(notes));
+}
+
 var addNote = (title, body) => {
 	
 	var notes = []
@@ -11,55 +26,39 @@ var addNote = (title, body) => {
 		body: body
 	}
 
-	try {
-		var notesString = fs.readFileSync('notes.json');
-		notes = JSON.parse(notesString);
-	}
-	catch(e) {
-		console.log(e);
-	}
+	readFileNotes(notes);
 
 	var duplicateNotes = notes.filter((note) => note.title === title);
 
 	if (duplicateNotes.length === 0) {
 		notes.push(note);	
-		fs.writeFileSync('notes.json', JSON.stringify(notes));
+		saveFile(notes);
+		return note;
 	}
 
 }
 
 var getAll = () => {
 	
-	var notes = fs.readFileSync('notes.json');
+	var notes = readFileNotes();
 
 	return JSON.parse(notes);
 }
 
 var removeNote = (title) => {
 	
-	var notes = fs.readFileSync('notes.json');
-	var notesObj = JSON.parse(notes);
+	var notes = readFileNotes();
+	var filteredNotes = notes.filter((note) => (note.title !== title));
+	saveFile(filteredNotes);
 
-	for (var i = 0; i < notesObj.length; i++) {
-		if (notesObj[i].title === title) {
-			notesObj.splice(i, i + 1);
-		}
-	}
-
-	console.log(notesObj);
-	fs.writeFileSync('notes.json', JSON.stringify(notesObj));
+	return notes.length !== filteredNotes.length;
 }
 
 var readNote = (title) => {
 	
-	var notes = fs.readFileSync('notes.json');
-	var notesObj = JSON.parse(notes);
-
-	for (var i = 0; i < notesObj.length; i++) {
-		if (notesObj[i].title === title) {
-			return notesObj[i];
-		}
-	}
+	var notes = readFileNotes();
+	var filteredNotes = notes.filter((note) => (note.title === title));
+	return filteredNotes[0];
 }
 
 module.exports = {
