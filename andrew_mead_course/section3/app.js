@@ -1,4 +1,3 @@
-console.log('Starting app.js');
 
 const fs = require('fs');
 const _ = require('lodash');
@@ -28,7 +27,8 @@ if (command === 'add') {
 	
 }
 else if (command === 'list') {
-	console.log(notes.getAll());
+	var allNotes = notes.getAll();
+	allNotes.forEach((note) => console.log(note));
 }
 else if (command === 'read') {
 	var noteRead = notes.readNote(title);

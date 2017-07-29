@@ -1,4 +1,3 @@
-console.log('Starting notes');
 
 const fs = require('fs');
 
@@ -19,14 +18,12 @@ var saveFile = function(notes) {
 
 var addNote = (title, body) => {
 	
-	var notes = []
+	var notes = readFileNotes();
 	
 	var note = {
 		title: title,
 		body: body
 	}
-
-	readFileNotes(notes);
 
 	var duplicateNotes = notes.filter((note) => note.title === title);
 
@@ -39,10 +36,8 @@ var addNote = (title, body) => {
 }
 
 var getAll = () => {
-	
 	var notes = readFileNotes();
-
-	return JSON.parse(notes);
+	return notes;
 }
 
 var removeNote = (title) => {
