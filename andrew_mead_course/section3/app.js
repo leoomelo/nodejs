@@ -15,11 +15,9 @@ console.log('Command: ' + command);
 
 if (command === 'add') {
 	var note = notes.addNote(title, body);
-
 	if (note) {
-		console.log('Nota Adicionada');
-		console.log('Titulo: ' + note.title);
-		console.log('Conteúdo: ' + note.body)	
+
+		notes.logNote(note);
 	}
 	else {
 		console.log('Erro ao salvar a nota');
@@ -33,9 +31,7 @@ else if (command === 'list') {
 else if (command === 'read') {
 	var noteRead = notes.readNote(title);
 	if(noteRead) {
-		console.log('Nota: ');
-		console.log('Titulo: ' + noteRead.title);
-		console.log('Conteúdo: ' + noteRead.body);
+		notes.logNote(noteRead);
 	}
 	else {
 		console.log('Nota não encontrada');
