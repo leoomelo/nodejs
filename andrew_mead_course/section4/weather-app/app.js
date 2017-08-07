@@ -19,7 +19,7 @@ geocode.geocodeAddress(varg.a, (errorMessage, results) => {
 		console.log(errorMessage);
 	}
 	else {
-		console.log(results);
+		console.log(JSON.stringify(results, undefined, 2));
 	}
 
 } );
