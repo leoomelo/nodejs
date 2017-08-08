@@ -10,8 +10,14 @@ module.exports.getWeather = (latitude, longitude, callback) => {
 		if (error) {
 			callback('Não foi possível buscar a temperatura');
 		}
-		else {
-			callback(null, body.currently);	
+		else if (response.statusCode === 400) {
+			callback('Não foi possível calcular a temperatura');
+		}
+		else if (response.statusCode === 200) {
+			callback(null, {
+				temperature: body.currently.temperature,
+				apparentTemperature: body.currently.apparentTemperature
+			});	
 		}
 	})
 }

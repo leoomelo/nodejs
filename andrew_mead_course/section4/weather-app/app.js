@@ -1,5 +1,4 @@
 const yargs = require('yargs');
-const request = require('request');
 const geocode = require('./geocode/geocode');
 const weather = require('./weather/weather');
 
@@ -26,7 +25,8 @@ geocode.geocodeAddress(varg.a, (errorMessage, results) => {
 			if (errorWeatherMessage) {
 				console.log(errorWeatherMessage);
 			}
-			console.log(weatherResult);
+			console.log('Temperatura: ' + ((weatherResult.temperature - 32)/1.8).toFixed(2));
+			console.log('Temperatura Aparente: ' + ((weatherResult.apparentTemperature - 32)/1.8).toFixed(2));
 		})
 	}
 
