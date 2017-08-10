@@ -1,10 +1,8 @@
-
 const request = require('request');
 
-module.exports.geocodeAddress = (address) => {
-
+var geocodeAddress = (address) => {
 	return new Promise( (resolve, reject) => {
-		if (address) {
+		if(address) {
 			var defaultURL = 'http://maps.googleapis.com/maps/api/geocode/json?address='
 			var encodedAddress = encodeURIComponent(address);
 
@@ -33,11 +31,12 @@ module.exports.geocodeAddress = (address) => {
 				}
 			});	
 		}
-		else {
-			reject('Endereço Inválido');
-		}
-	})
-
-	
+	});
 }
 
+
+geocodeAddress('key west fl').then((location) => {
+	console.log(JSON.stringify(location, undefined, 2));
+}, (errorMessage) => {
+	console.log(errorMessage);
+})
